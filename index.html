@@ -390,8 +390,8 @@ textarea::placeholder{color:var(--faint)}
         <div class="section">
           <div class="label">모드</div>
           <div class="modes" id="modeSeg">
-            <button data-v="exam" class="on"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg></span><span><b>실전 모의고사</b><span class="d">타이머 · 제출 후 한 번에 채점</span></span><span class="rd"></span></button>
-            <button data-v="practice"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg></span><span><b>연습</b><span class="d">고르면 바로 정답과 해설</span></span><span class="rd"></span></button>
+            <button data-v="practice" class="on"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg></span><span><b>연습</b><span class="d">고르면 바로 정답과 해설</span></span><span class="rd"></span></button>
+            <button data-v="exam"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg></span><span><b>실전 모의고사</b><span class="d">타이머 · 제출 후 한 번에 채점</span></span><span class="rd"></span></button>
             <button data-v="wrong"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></span><span><b>오답 다시 풀기</b><span class="d">틀린 문제만 · 맞히면 노트에서 빠짐</span></span><span class="rd"></span></button>
           </div>
           <div id="modeHint" hidden></div>
@@ -407,7 +407,7 @@ textarea::placeholder{color:var(--faint)}
           <div class="seg" id="numSeg"><button data-v="10">10</button><button data-v="20" class="on">20</button><button data-v="30">30</button><button data-v="50">50</button><button data-v="all">전체</button></div>
         </div>
 
-        <div class="section" id="timeWrap">
+        <div class="section" id="timeWrap" hidden>
           <div class="label">문항당 제한 시간</div>
           <div class="seg" id="timeSeg"><button data-v="45">45초</button><button data-v="60" class="on">1분</button><button data-v="90">1분 30초</button><button data-v="0">무제한</button></div>
         </div>
@@ -721,7 +721,7 @@ const DRILLS = [
 const CATS=["기초개념","ML기초","LLM원리","설정값","한계","확장기술","책임·보안·법","반도체","프롬프트","실전전략"];
 const LS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 const $=id=>document.getElementById(id);
-let mode="exam",num="20",perQ=60,cats=new Set(CATS);
+let mode="practice",num="20",perQ=60,cats=new Set(CATS);
 let S=null;let tick=null;
 const HOME_SUB="SK하이닉스 AI 해커톤 1차 예선 대비";
 
