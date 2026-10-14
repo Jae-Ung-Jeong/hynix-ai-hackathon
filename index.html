@@ -637,7 +637,7 @@ textarea::placeholder{color:var(--faint)}
       <div class="aibox" id="aiBox"><span class="al">AI 어시스트 <b id="aiLeft">10</b>회 남음</span><span class="aib"><button class="btn sm" id="aiUndo" aria-label="사용 취소">↺</button><button class="btn sm primary" id="aiUse">1회 사용</button></span></div>
       <div class="card section" style="gap:6px">
         <div class="label" style="align-items:center">파일 목록<button class="btn sm" id="psCopyAll">전체 자료 복사</button></div>
-        <div class="hint">실제 시험은 파일이 AI에 첨부돼 있고 복사가 막혀 있어요. 연습할 땐 복사해서 내 AI에 붙여 넣으세요.</div>
+        <div class="hint">실제 시험은 파일이 AI에 첨부돼 있고 복사가 막혀 있어요. 연습할 땐 복사해서 내 AI에 붙여 넣으세요. 문항은 복사되지 않으니, 질문은 직접 써서 10회 안에 풀어 보세요.</div>
         <div id="psFiles"></div>
       </div>
       <div id="psQs" class="stack"></div>
@@ -999,7 +999,7 @@ function setStats(){const h=LS.get("setHist",{});
   const n=SETS.filter(x=>h[x.id]).length;$("setStat").textContent=n?`${SETS.length}세트 중 ${n}세트 응시 · 난이도 순서대로 풀면 좋아요`:`${SETS.length}세트 · 1번(기본)부터 차례로 풀어보세요`}
 $("setList").onclick=e=>{const b=e.target.closest("[data-set]");if(b)startSet(+b.dataset.set)};
 function fileTitle(f){return (f.folder?f.folder+"/":"")+f.name}
-function bundle(x){return `[상황]\n${x.intro}\n`+((x.notes&&x.notes.length)?`\n[주의사항]\n${x.notes.map(n=>"- "+n).join("\n")}\n`:"")+x.files.map(f=>`\n===== ${fileTitle(f)} =====\n${f.body}`).join("\n")+`\n\n[문항]\n`+x.qs.map((q,i)=>`${i+1}. (${q.type==="mc"?"객관식":"주관식"}) ${q.q}`+(q.type==="mc"?"\n"+q.o.map((o,j)=>`   ${j+1}) ${o}`).join("\n"):"")).join("\n")}
+function bundle(x){return `[상황]\n${x.intro}\n`+((x.notes&&x.notes.length)?`\n[주의사항]\n${x.notes.map(n=>"- "+n).join("\n")}\n`:"")+x.files.map(f=>`\n===== ${fileTitle(f)} =====\n${f.body}`).join("\n")}
 function fileView(f){const L=f.body.split("\n");let out="",tb=[];
   const flush=()=>{if(!tb.length)return;const h=tb[0],r=tb.slice(1);out+=`<div class="tblw"><table><thead><tr>${h.map(c=>`<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${r.map(row=>`<tr>${row.map(c=>`<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;tb=[]};
   L.forEach(l=>{if(l.includes(" | ")){tb.push(l.split(" | ").map(c=>c.trim()))}else{flush();out+=l.trim()?`<p>${esc(l)}</p>`:`<div class="gap"></div>`}});flush();return `<div class="fdoc">${out}</div>`}
